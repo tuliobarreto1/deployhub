@@ -413,7 +413,7 @@
     </h1>
     <div class="hero-meta">
       <div class="hero-count">
-        <span class="hero-count-num">2</span>
+        <span class="hero-count-num" id="app-count">—</span>
         <span class="hero-count-label">aplicações</span>
       </div>
       <div class="hero-divider"></div>
@@ -433,68 +433,10 @@
     <div class="section-header">
       <h2 class="section-title">Aplicações</h2>
       <div class="section-line"></div>
-      <span class="section-count">02 — live</span>
+      <span class="section-count" id="section-count">— — live</span>
     </div>
 
-    <div class="apps-grid">
-
-      <!-- PMO Manager -->
-      <a class="card" href="https://pmomanager-deployhub.duckdns.org">
-        <div class="card-header">
-          <div class="card-icon">📊</div>
-          <span class="card-badge live">● live</span>
-        </div>
-        <h3 class="card-title">PMO Manager</h3>
-        <p class="card-desc">
-          Gestão de projetos com Gantt interativo, curva S, dashboard de desempenho 
-          e controle de orçamento e riscos. Tudo em um único lugar.
-        </p>
-        <div class="card-tags">
-          <span class="tag">Next.js</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">Supabase</span>
-          <span class="tag">Gestão</span>
-        </div>
-        <div class="card-footer">
-          <span class="card-link">
-            Acessar aplicação
-            <span class="card-link-arrow">→</span>
-          </span>
-        </div>
-      </a>
-
-      <!-- Status Reservas -->
-      <a class="card" href="https://status-reservas.duckdns.org">
-        <div class="card-header">
-          <div class="card-icon">🚗</div>
-          <span class="card-badge live">● live</span>
-        </div>
-        <h3 class="card-title">Status de Reservas</h3>
-        <p class="card-desc">
-          Acompanhamento em tempo real das reservas por data e loja, análise de frota 
-          e histórico de ocupação de veículos. Integrado ao sistema ASA via VPN.
-        </p>
-        <div class="card-tags">
-          <span class="tag">FastAPI</span>
-          <span class="tag">React</span>
-          <span class="tag">SQL Server</span>
-          <span class="tag">VPN</span>
-        </div>
-        <div class="card-footer">
-          <span class="card-link">
-            Acessar aplicação
-            <span class="card-link-arrow">→</span>
-          </span>
-        </div>
-      </a>
-
-      <!-- Coming soon -->
-      <div class="card card-soon">
-        <div class="card-soon-icon">+</div>
-        <span class="card-soon-text">em breve</span>
-      </div>
-
-    </div>
+    <div class="apps-grid" id="apps-grid"></div>
   </section>
 
   <footer>
@@ -505,6 +447,7 @@
   </footer>
 
   <script>
+    // ── Theme ────────────────────────────────────────────────
     function toggleTheme() {
       const html = document.documentElement;
       const btn = document.getElementById('themeBtn');
@@ -516,7 +459,9 @@
       document.documentElement.setAttribute('data-theme', 'dark');
       document.getElementById('themeBtn').textContent = '○ light';
     }
-    document.querySelectorAll('.card:not(.card-soon)').forEach(card => {
+
+    // ── Card glow helper ─────────────────────────────────────
+    function attachGlow(card) {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -524,7 +469,87 @@
         card.style.setProperty('--mx', x + '%');
         card.style.setProperty('--my', y + '%');
       });
-    });
+    }
+
+    // ── Build a single app card ───────────────────────────────
+    function buildCard(app, index) {
+      const delay = ((index + 1) * 0.1).toFixed(1);
+      const badgeClass = app.status === 'live' ? 'live' : app.status === 'wip' ? 'wip' : '';
+      const badgeLabel = app.status === 'live' ? '● live' : app.status === 'wip' ? '◑ wip' : app.status;
+      const tagsHTML = (app.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+
+      const card = document.createElement('a');
+      card.className = 'card';
+      card.href = app.url;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.style.animationDelay = `${delay}s`;
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="card-icon">${app.icon}</div>
+          <span class="card-badge ${badgeClass}">${badgeLabel}</span>
+        </div>
+        <h3 class="card-title">${app.name}</h3>
+        <p class="card-desc">${app.description}</p>
+        <div class="card-tags">${tagsHTML}</div>
+        <div class="card-footer">
+          <span class="card-link">
+            Acessar aplicação
+            <span class="card-link-arrow">→</span>
+          </span>
+        </div>`;
+
+      attachGlow(card);
+      return card;
+    }
+
+    // ── Build "em breve" placeholder ─────────────────────────
+    function buildSoonCard(index) {
+      const delay = ((index + 1) * 0.1).toFixed(1);
+      const card = document.createElement('div');
+      card.className = 'card card-soon';
+      card.style.animationDelay = `${delay}s`;
+      card.innerHTML = `
+        <div class="card-soon-icon">+</div>
+        <span class="card-soon-text">em breve</span>`;
+      return card;
+    }
+
+    // ── Load apps.json and render ────────────────────────────
+    async function loadApps() {
+      const grid = document.getElementById('apps-grid');
+      try {
+        const res = await fetch('apps.json?v=' + Date.now());
+        if (!res.ok) throw new Error('Failed to load apps.json');
+        const data = await res.json();
+        const apps = data.apps || [];
+
+        // Update counters
+        const liveCount = apps.filter(a => a.status === 'live').length;
+        document.getElementById('app-count').textContent = apps.length;
+        const pad = n => String(n).padStart(2, '0');
+        document.getElementById('section-count').textContent =
+          `${pad(liveCount)} — live`;
+
+        // Render app cards
+        apps.forEach((app, i) => grid.appendChild(buildCard(app, i)));
+
+        // Always show at least one "em breve" slot
+        // Fill to align with 3-column grid (keep at least 1 placeholder)
+        const cols = 3;
+        const total = apps.length;
+        const remainder = total % cols;
+        const placeholders = remainder === 0 ? 1 : cols - remainder;
+        for (let i = 0; i < placeholders; i++) {
+          grid.appendChild(buildSoonCard(total + i));
+        }
+      } catch (err) {
+        console.error('DeployHub: could not load apps.json', err);
+        grid.innerHTML = '<p style="color:var(--text-muted);font-family:\'DM Mono\',monospace;font-size:.8rem">Não foi possível carregar os apps.</p>';
+      }
+    }
+
+    loadApps();
   </script>
 </body>
 </html>

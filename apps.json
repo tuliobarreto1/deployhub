@@ -1,0 +1,20 @@
+{
+  "apps": [
+    {
+      "name": "PMO Manager",
+      "description": "Gestão de projetos com Gantt interativo, curva S, dashboard de desempenho e controle de orçamento e riscos.",
+      "url": "https://pmomanager-deployhub.duckdns.org",
+      "icon": "📊",
+      "tags": ["Next.js", "TypeScript", "Supabase", "Gestão"],
+      "status": "live"
+    },
+    {
+      "name": "Status de Reservas",
+      "description": "Acompanhamento em tempo real das reservas por data e loja, análise de frota e histórico de ocupação. Integrado ao sistema ASA via VPN.",
+      "url": "https://status-reservas.duckdns.org",
+      "icon": "🚗",
+      "tags": ["FastAPI", "React", "SQL Server", "VPN"],
+      "status": "live"
+    }
+  ]
+}
