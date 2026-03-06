@@ -46,9 +46,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--bg);
@@ -57,8 +55,6 @@
       transition: background 0.4s, color 0.4s;
       overflow-x: hidden;
     }
-
-    /* Background texture */
     body::before {
       content: '';
       position: fixed;
@@ -69,8 +65,6 @@
       z-index: 0;
       transition: opacity 0.4s;
     }
-
-    /* Dot grid */
     body::after {
       content: '';
       position: fixed;
@@ -81,8 +75,6 @@
       z-index: 0;
       opacity: 0.6;
     }
-
-    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -97,7 +89,6 @@
       border-bottom: 1px solid var(--border);
       transition: background 0.4s, border-color 0.4s;
     }
-
     .nav-logo {
       font-family: 'DM Serif Display', serif;
       font-size: 1.4rem;
@@ -107,7 +98,6 @@
       align-items: center;
       gap: 10px;
     }
-
     .nav-logo-dot {
       width: 8px; height: 8px;
       border-radius: 50%;
@@ -115,18 +105,11 @@
       display: inline-block;
       animation: pulse 2s ease-in-out infinite;
     }
-
     @keyframes pulse {
       0%, 100% { transform: scale(1); opacity: 1; }
       50% { transform: scale(1.4); opacity: 0.7; }
     }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
+    .nav-right { display: flex; align-items: center; gap: 24px; }
     .nav-status {
       font-family: 'DM Mono', monospace;
       font-size: 0.7rem;
@@ -135,14 +118,12 @@
       align-items: center;
       gap: 6px;
     }
-
     .status-dot {
       width: 6px; height: 6px;
       border-radius: 50%;
       background: #22c55e;
       animation: pulse 1.5s ease-in-out infinite;
     }
-
     .theme-toggle {
       background: var(--bg-glass);
       border: 1px solid var(--border-strong);
@@ -155,14 +136,7 @@
       transition: all 0.2s;
       backdrop-filter: blur(8px);
     }
-
-    .theme-toggle:hover {
-      color: var(--text);
-      border-color: var(--accent2);
-      background: var(--tag-bg);
-    }
-
-    /* HERO */
+    .theme-toggle:hover { color: var(--text); border-color: var(--accent2); background: var(--tag-bg); }
     .hero {
       position: relative;
       z-index: 1;
@@ -170,7 +144,6 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-
     .hero-eyebrow {
       font-family: 'DM Mono', monospace;
       font-size: 0.72rem;
@@ -181,7 +154,6 @@
       opacity: 0;
       animation: fadeUp 0.6s ease forwards 0.2s;
     }
-
     .hero-title {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(3rem, 7vw, 5.5rem);
@@ -192,25 +164,6 @@
       opacity: 0;
       animation: fadeUp 0.7s ease forwards 0.35s;
     }
-
-    .hero-title em {
-      font-style: italic;
-      background: linear-gradient(135deg, var(--accent2), var(--accent3));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-sub {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 480px;
-      line-height: 1.7;
-      font-weight: 300;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.5s;
-    }
-
     .hero-meta {
       margin-top: 48px;
       display: flex;
@@ -219,20 +172,13 @@
       opacity: 0;
       animation: fadeUp 0.7s ease forwards 0.65s;
     }
-
-    .hero-count {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
+    .hero-count { display: flex; flex-direction: column; gap: 2px; }
     .hero-count-num {
       font-family: 'DM Serif Display', serif;
       font-size: 2rem;
       line-height: 1;
       color: var(--text);
     }
-
     .hero-count-label {
       font-family: 'DM Mono', monospace;
       font-size: 0.65rem;
@@ -240,19 +186,11 @@
       letter-spacing: 0.1em;
       color: var(--text-faint);
     }
-
-    .hero-divider {
-      width: 1px;
-      height: 40px;
-      background: var(--border-strong);
-    }
-
+    .hero-divider { width: 1px; height: 40px; background: var(--border-strong); }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    /* SECTION */
     .section {
       position: relative;
       z-index: 1;
@@ -260,41 +198,29 @@
       margin: 0 auto;
       padding: 0 48px 120px;
     }
-
     .section-header {
       display: flex;
       align-items: baseline;
       gap: 16px;
       margin-bottom: 40px;
     }
-
     .section-title {
       font-family: 'DM Serif Display', serif;
       font-size: 1.6rem;
       color: var(--text);
       letter-spacing: -0.02em;
     }
-
-    .section-line {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
+    .section-line { flex: 1; height: 1px; background: var(--border); }
     .section-count {
       font-family: 'DM Mono', monospace;
       font-size: 0.7rem;
       color: var(--text-faint);
     }
-
-    /* GRID */
     .apps-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
-
-    /* CARD */
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -311,12 +237,10 @@
       display: block;
       color: inherit;
     }
-
     .card:nth-child(1) { animation-delay: 0.1s; }
     .card:nth-child(2) { animation-delay: 0.2s; }
     .card:nth-child(3) { animation-delay: 0.3s; }
     .card:nth-child(4) { animation-delay: 0.4s; }
-
     .card::before {
       content: '';
       position: absolute;
@@ -326,18 +250,8 @@
       opacity: 0;
       transition: opacity 0.3s;
     }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--border-strong);
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    /* Card glow effect */
+    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-color: var(--border-strong); }
+    .card:hover::before { opacity: 1; }
     .card::after {
       content: '';
       position: absolute;
@@ -348,18 +262,13 @@
       pointer-events: none;
       border-radius: 20px;
     }
-
-    .card:hover::after {
-      opacity: 1;
-    }
-
+    .card:hover::after { opacity: 1; }
     .card-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       margin-bottom: 20px;
     }
-
     .card-icon {
       width: 48px; height: 48px;
       border-radius: 14px;
@@ -371,11 +280,7 @@
       border: 1px solid var(--border);
       transition: transform 0.3s;
     }
-
-    .card:hover .card-icon {
-      transform: scale(1.1) rotate(-3deg);
-    }
-
+    .card:hover .card-icon { transform: scale(1.1) rotate(-3deg); }
     .card-badge {
       font-family: 'DM Mono', monospace;
       font-size: 0.62rem;
@@ -387,19 +292,8 @@
       letter-spacing: 0.08em;
       background: var(--bg-glass);
     }
-
-    .card-badge.live {
-      color: #22c55e;
-      border-color: rgba(34,197,94,0.3);
-      background: rgba(34,197,94,0.08);
-    }
-
-    .card-badge.wip {
-      color: #f59e0b;
-      border-color: rgba(245,158,11,0.3);
-      background: rgba(245,158,11,0.08);
-    }
-
+    .card-badge.live { color: #22c55e; border-color: rgba(34,197,94,0.3); background: rgba(34,197,94,0.08); }
+    .card-badge.wip { color: #f59e0b; border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.08); }
     .card-title {
       font-family: 'DM Serif Display', serif;
       font-size: 1.1rem;
@@ -407,7 +301,6 @@
       letter-spacing: -0.02em;
       margin-bottom: 8px;
     }
-
     .card-desc {
       font-size: 0.8rem;
       color: var(--text-muted);
@@ -415,14 +308,7 @@
       font-weight: 300;
       margin-bottom: 20px;
     }
-
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 24px;
-    }
-
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
     .tag {
       font-family: 'DM Mono', monospace;
       font-size: 0.65rem;
@@ -432,7 +318,6 @@
       color: var(--tag-text);
       letter-spacing: 0.04em;
     }
-
     .card-footer {
       display: flex;
       align-items: center;
@@ -440,7 +325,6 @@
       padding-top: 20px;
       border-top: 1px solid var(--border);
     }
-
     .card-link {
       font-family: 'DM Mono', monospace;
       font-size: 0.72rem;
@@ -450,20 +334,9 @@
       gap: 6px;
       transition: gap 0.2s;
     }
-
-    .card:hover .card-link {
-      gap: 10px;
-    }
-
-    .card-link-arrow {
-      transition: transform 0.2s;
-    }
-
-    .card:hover .card-link-arrow {
-      transform: translateX(4px);
-    }
-
-    /* COMING SOON CARD */
+    .card:hover .card-link { gap: 10px; }
+    .card-link-arrow { transition: transform 0.2s; }
+    .card:hover .card-link-arrow { transform: translateX(4px); }
     .card-soon {
       background: transparent;
       border: 1px dashed var(--border-strong);
@@ -476,18 +349,8 @@
       opacity: 0.5;
       transition: opacity 0.3s;
     }
-
-    .card-soon:hover {
-      opacity: 0.8;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .card-soon-icon {
-      font-size: 1.5rem;
-      color: var(--text-faint);
-    }
-
+    .card-soon:hover { opacity: 0.8; transform: none; box-shadow: none; }
+    .card-soon-icon { font-size: 1.5rem; color: var(--text-faint); }
     .card-soon-text {
       font-family: 'DM Mono', monospace;
       font-size: 0.72rem;
@@ -495,8 +358,6 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
-
-    /* FOOTER */
     footer {
       position: relative;
       z-index: 1;
@@ -508,13 +369,7 @@
       align-items: center;
       justify-content: space-between;
     }
-
-    .footer-left {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--text-faint);
-    }
-
+    .footer-left { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-faint); }
     .footer-right {
       font-family: 'DM Mono', monospace;
       font-size: 0.7rem;
@@ -523,18 +378,14 @@
       align-items: center;
       gap: 6px;
     }
-
-    .footer-right span {
-      color: var(--accent2);
-    }
-
-    /* RESPONSIVE */
+    .footer-right span { color: var(--accent2); }
     @media (max-width: 768px) {
       nav { padding: 16px 24px; }
       .hero { padding: 120px 24px 60px; }
       .section { padding: 0 24px 80px; }
       footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
-      .apps-grid { grid-template-columns: 1fr; }      .hero-meta { gap: 20px; }
+      .apps-grid { grid-template-columns: 1fr; }
+      .hero-meta { gap: 20px; }
       .nav-status { display: none; }
     }
   </style>
@@ -562,8 +413,8 @@
     </h1>
     <div class="hero-meta">
       <div class="hero-count">
-        <span class="hero-count-num" id="appCount">1</span>
-        <span class="hero-count-label">aplicação</span>
+        <span class="hero-count-num">2</span>
+        <span class="hero-count-label">aplicações</span>
       </div>
       <div class="hero-divider"></div>
       <div class="hero-count">
@@ -582,7 +433,7 @@
     <div class="section-header">
       <h2 class="section-title">Aplicações</h2>
       <div class="section-line"></div>
-      <span class="section-count">01 — ??</span>
+      <span class="section-count">02 — live</span>
     </div>
 
     <div class="apps-grid">
@@ -612,12 +463,32 @@
         </div>
       </a>
 
-      <!-- Coming soon -->
-      <div class="card card-soon">
-        <div class="card-soon-icon">+</div>
-        <span class="card-soon-text">em breve</span>
-      </div>
+      <!-- Status Reservas -->
+      <a class="card" href="https://status-reservas.duckdns.org">
+        <div class="card-header">
+          <div class="card-icon">🚗</div>
+          <span class="card-badge live">● live</span>
+        </div>
+        <h3 class="card-title">Status de Reservas</h3>
+        <p class="card-desc">
+          Acompanhamento em tempo real das reservas por data e loja, análise de frota 
+          e histórico de ocupação de veículos. Integrado ao sistema ASA via VPN.
+        </p>
+        <div class="card-tags">
+          <span class="tag">FastAPI</span>
+          <span class="tag">React</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">VPN</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">
+            Acessar aplicação
+            <span class="card-link-arrow">→</span>
+          </span>
+        </div>
+      </a>
 
+      <!-- Coming soon -->
       <div class="card card-soon">
         <div class="card-soon-icon">+</div>
         <span class="card-soon-text">em breve</span>
@@ -634,7 +505,6 @@
   </footer>
 
   <script>
-    // Theme toggle
     function toggleTheme() {
       const html = document.documentElement;
       const btn = document.getElementById('themeBtn');
@@ -642,14 +512,10 @@
       html.setAttribute('data-theme', isDark ? 'light' : 'dark');
       btn.textContent = isDark ? '◐ dark' : '○ light';
     }
-
-    // Check system preference
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       document.documentElement.setAttribute('data-theme', 'dark');
       document.getElementById('themeBtn').textContent = '○ light';
     }
-
-    // Card mouse glow effect
     document.querySelectorAll('.card:not(.card-soon)').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
