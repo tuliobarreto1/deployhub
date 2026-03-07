@@ -499,8 +499,9 @@
     function coolifyToKey(status) {
       if (!status) return 'unknown';
       const s = status.toLowerCase();
-      if (s === 'running')                              return 'live';
-      if (['restarting', 'starting', 'updating', 'building'].includes(s)) return 'checking';
+      // Coolify returns compound statuses like "running:healthy", "running:unhealthy"
+      if (s.startsWith('running'))                                              return 'live';
+      if (['restarting', 'starting', 'updating', 'building'].some(k => s.startsWith(k))) return 'checking';
       return 'down'; // stopped, error, crashed, exited, etc.
     }
 
@@ -516,6 +517,7 @@
         if (!res.ok) { setBadge(badgeEl, 'down'); }
         else {
           const data = await res.json();
+          console.debug('[DeployHub] status response:', coolifyId, data?.status ?? data);
           setBadge(badgeEl, coolifyToKey(data.status));
         }
       } catch {
