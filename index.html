@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DeployHub</title>
+  <link rel="icon" href="data:," />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -462,6 +463,13 @@
       document.getElementById('themeBtn').textContent = '○ light';
     }
 
+    // ── Safe text helper (prevents XSS from apps.json data) ──────────────────
+    function esc(str) {
+      const d = document.createElement('div');
+      d.textContent = String(str ?? '');
+      return d.innerHTML;
+    }
+
     // ── Card glow helper ─────────────────────────────────────
     function attachGlow(card) {
       card.addEventListener('mousemove', (e) => {
@@ -524,7 +532,7 @@
       // Initial badge from apps.json (shown instantly while we wait for API)
       const initKey = app.status === 'live' ? 'live' : app.status === 'wip' ? 'checking' : 'unknown';
       const init = BADGE[initKey];
-      const tagsHTML = (app.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+      const tagsHTML = (app.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('');
 
       const card = document.createElement('a');
       card.className = 'card';
@@ -534,11 +542,11 @@
       card.style.animationDelay = `${delay}s`;
       card.innerHTML = `
         <div class="card-header">
-          <div class="card-icon">${app.icon}</div>
+          <div class="card-icon">${esc(app.icon)}</div>
           <span class="card-badge ${init.cls}">${init.label}</span>
         </div>
-        <h3 class="card-title">${app.name}</h3>
-        <p class="card-desc">${app.description}</p>
+        <h3 class="card-title">${esc(app.name)}</h3>
+        <p class="card-desc">${esc(app.description)}</p>
         <div class="card-tags">${tagsHTML}</div>
         <div class="card-footer">
           <span class="card-link">
@@ -547,7 +555,15 @@
           </span>
         </div>`;
 
-      // Track badge element for live polling
+      // Validate URL before assigning (prevent javascript: injection)
+      try {
+        const parsed = new URL(app.url);
+        if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') throw new Error();
+        card.href = parsed.href;
+      } catch {
+        card.removeAttribute('href');
+        card.style.cursor = 'default';
+      }
       if (app.coolify_id) {
         const badgeEl = card.querySelector('.card-badge');
         _tracked.push({ coolify_id: app.coolify_id, badgeEl });
