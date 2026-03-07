@@ -6,7 +6,8 @@
       "url": "https://pmomanager-deployhub.duckdns.org",
       "icon": "📊",
       "tags": ["Next.js", "TypeScript", "Supabase", "Gestão"],
-      "status": "live"
+      "status": "live",
+      "coolify_id": "c4wg4gcg4go8s8o0w4csoo4g"
     },
     {
       "name": "Status de Reservas",
@@ -14,7 +15,8 @@
       "url": "https://status-reservas.duckdns.org",
       "icon": "🚗",
       "tags": ["FastAPI", "React", "SQL Server", "VPN"],
-      "status": "live"
+      "status": "live",
+      "coolify_id": "pog0kgcc8ccw40csw884sk4o"
     },
     {
       "name": "Pricing",
@@ -22,15 +24,18 @@
       "url": "https://pricing-deployhub.duckdns.org/",
       "icon": "📈",
       "tags": ["FastAPI", "Python", "Selenium", "Pandas"],
-      "status": "live"
+      "status": "live",
+      "coolify_id": "iosggcsowoog40kggkowsokk"
     },
     {
-        "name": "Controle Jurídico ASA",
-        "description": "Sistema de gestão de ações trabalhistas com controle de processos, solicitação e upload de documentos, fluxo de aprovação e histórico completo. Acesso por perfil: ADM, Advogado e RH.",
-        "url": "https://projetojuridicoasa.duckdns.org",
-        "icon": "⚖️",
-        "tags": ["Next.js", "TypeScript", "Supabase", "RBAC"],
-        "status": "live"
- }
+      "name": "Controle Jurídico ASA",
+      "description": "Sistema de gestão de ações trabalhistas com controle de processos, solicitação e upload de documentos, fluxo de aprovação e histórico completo. Acesso por perfil: ADM, Advogado e RH.",
+      "url": "https://projetojuridicoasa.duckdns.org",
+      "icon": "⚖️",
+      "tags": ["Next.js", "TypeScript", "Supabase", "RBAC"],
+      "status": "live",
+      "coolify_id": "b04oogwgkgwo8sg4ksskk0ok"
+    }
   ]
 }
+

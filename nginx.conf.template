@@ -1,0 +1,33 @@
+server {
+    listen 80;
+
+    # ── Static files ──────────────────────────────────────────────────────────
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html;
+        try_files $uri $uri/ =404;
+    }
+
+    # ── Coolify API proxy ─────────────────────────────────────────────────────
+    # Frontend calls /api/status/<uuid> → nginx proxies to Coolify API
+    # The token never leaves the server.
+    location /api/status/ {
+        # Strip /api/status/ prefix, keeping only the UUID
+        rewrite ^/api/status/(.+)$ /api/v1/applications/$1 break;
+
+        proxy_pass         ${COOLIFY_URL};
+        proxy_set_header   Authorization "Bearer ${COOLIFY_API_TOKEN}";
+        proxy_set_header   Accept        "application/json";
+        proxy_set_header   Host          $proxy_host;
+
+        # Allow the front-end (same origin) to read the response
+        add_header Access-Control-Allow-Origin  "$http_origin" always;
+        add_header Access-Control-Allow-Methods "GET, OPTIONS"  always;
+        add_header Cache-Control                "no-store"      always;
+
+        # Short timeout — we want a fast failure, not a hanging badge
+        proxy_connect_timeout  5s;
+        proxy_read_timeout     8s;
+        proxy_send_timeout     5s;
+    }
+}

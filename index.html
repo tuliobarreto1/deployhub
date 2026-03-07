@@ -294,6 +294,8 @@
     }
     .card-badge.live { color: #22c55e; border-color: rgba(34,197,94,0.3); background: rgba(34,197,94,0.08); }
     .card-badge.wip { color: #f59e0b; border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.08); }
+    .card-badge.down { color: #ef4444; border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.08); }
+    .card-badge.checking { color: #a78bfa; border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.08); }
     .card-title {
       font-family: 'DM Serif Display', serif;
       font-size: 1.1rem;
@@ -471,11 +473,54 @@
       });
     }
 
+    // ── Status badge helpers ────────────────────────────────
+    const BADGE = {
+      live:     { cls: 'live',     label: '● live' },
+      down:     { cls: 'down',     label: '● down' },
+      checking: { cls: 'checking', label: '◑ checking' },
+      unknown:  { cls: '',         label: '? ——' },
+    };
+
+    function setBadge(el, key) {
+      const b = BADGE[key] || BADGE.unknown;
+      el.className = `card-badge ${b.cls}`;
+      el.textContent = b.label;
+    }
+
+    // Maps a Coolify status string to one of our badge keys
+    function coolifyToKey(status) {
+      if (!status) return 'unknown';
+      const s = status.toLowerCase();
+      if (s === 'running')                              return 'live';
+      if (['restarting', 'starting', 'updating', 'building'].includes(s)) return 'checking';
+      return 'down'; // stopped, error, crashed, exited, etc.
+    }
+
+    // ── Poll a single app's status via the nginx proxy ────────────
+    async function fetchStatus(coolifyId, badgeEl) {
+      if (!coolifyId || coolifyId.startsWith('COLE_')) return; // placeholder — skip
+      setBadge(badgeEl, 'checking');
+      try {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 9000);
+        const res = await fetch(`/api/status/${coolifyId}`, { signal: ctrl.signal });
+        clearTimeout(timer);
+        if (!res.ok) { setBadge(badgeEl, 'down'); return; }
+        const data = await res.json();
+        setBadge(badgeEl, coolifyToKey(data.status));
+      } catch {
+        setBadge(badgeEl, 'unknown');
+      }
+    }
+
     // ── Build a single app card ───────────────────────────────
+    const _tracked = []; // { coolify_id, badgeEl }
+
     function buildCard(app, index) {
       const delay = ((index + 1) * 0.1).toFixed(1);
-      const badgeClass = app.status === 'live' ? 'live' : app.status === 'wip' ? 'wip' : '';
-      const badgeLabel = app.status === 'live' ? '● live' : app.status === 'wip' ? '◑ wip' : app.status;
+      // Initial badge from apps.json (shown instantly while we wait for API)
+      const initKey = app.status === 'live' ? 'live' : app.status === 'wip' ? 'checking' : 'unknown';
+      const init = BADGE[initKey];
       const tagsHTML = (app.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
 
       const card = document.createElement('a');
@@ -487,7 +532,7 @@
       card.innerHTML = `
         <div class="card-header">
           <div class="card-icon">${app.icon}</div>
-          <span class="card-badge ${badgeClass}">${badgeLabel}</span>
+          <span class="card-badge ${init.cls}">${init.label}</span>
         </div>
         <h3 class="card-title">${app.name}</h3>
         <p class="card-desc">${app.description}</p>
@@ -498,6 +543,12 @@
             <span class="card-link-arrow">→</span>
           </span>
         </div>`;
+
+      // Track badge element for live polling
+      if (app.coolify_id) {
+        const badgeEl = card.querySelector('.card-badge');
+        _tracked.push({ coolify_id: app.coolify_id, badgeEl });
+      }
 
       attachGlow(card);
       return card;
@@ -513,6 +564,41 @@
         <div class="card-soon-icon">+</div>
         <span class="card-soon-text">em breve</span>`;
       return card;
+    }
+
+    // ── Live status polling (every 60 s) ──────────────────────
+    function pollAll() {
+      _tracked.forEach(({ coolify_id, badgeEl }) => fetchStatus(coolify_id, badgeEl));
+    }
+
+    function startPolling() {
+      if (!_tracked.length) return;
+      pollAll();                          // immediate first check
+      setInterval(pollAll, 60_000);       // then every 60 s
+    }
+
+    // ── Update nav status dot ─────────────────────────────
+    // After every poll, update the global status in the navbar
+    function updateNavStatus() {
+      const anyDown = _tracked.some(({ badgeEl }) =>
+        badgeEl.classList.contains('down'));
+      const dot = document.querySelector('.status-dot');
+      const label = document.querySelector('.nav-status');
+      if (!dot || !label) return;
+      if (anyDown) {
+        dot.style.background = '#ef4444';
+        label.lastChild.textContent = ' atenção: app fora do ar';
+      } else {
+        dot.style.background = '#22c55e';
+        label.lastChild.textContent = ' todos sistemas operacionais';
+      }
+    }
+
+    // Patch fetchStatus to also update nav after each check
+    const _origFetchStatus = fetchStatus;
+    async function fetchStatus(coolifyId, badgeEl) {
+      await _origFetchStatus(coolifyId, badgeEl);
+      updateNavStatus();
     }
 
     // ── Load apps.json and render ────────────────────────────
@@ -535,7 +621,6 @@
         apps.forEach((app, i) => grid.appendChild(buildCard(app, i)));
 
         // Always show at least one "em breve" slot
-        // Fill to align with 3-column grid (keep at least 1 placeholder)
         const cols = 3;
         const total = apps.length;
         const remainder = total % cols;
@@ -543,6 +628,9 @@
         for (let i = 0; i < placeholders; i++) {
           grid.appendChild(buildSoonCard(total + i));
         }
+
+        // Start live polling after cards are rendered
+        startPolling();
       } catch (err) {
         console.error('DeployHub: could not load apps.json', err);
         grid.innerHTML = '<p style="color:var(--text-muted);font-family:\'DM Mono\',monospace;font-size:.8rem">Não foi possível carregar os apps.</p>';
