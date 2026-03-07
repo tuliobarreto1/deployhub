@@ -15,6 +15,14 @@
       "icon": "🚗",
       "tags": ["FastAPI", "React", "SQL Server", "VPN"],
       "status": "live"
+    },
+    {
+      "name": "Pricing",
+      "description": "Análise de tarifas e Scraper automatizado que coleta e estrutura preços de aluguel de carros do site RentCars.com usando Selenium para navegar pelas páginas e exportar os dados em Excel.",
+      "url": "http://pricing-deployhub.duckdns.org/",
+      "icon": "📈",
+      "tags": ["FastAPI", "Python", "Selenium", "Pandas"],
+      "status": "live"
     }
   ]
 }
