@@ -505,12 +505,15 @@
         const timer = setTimeout(() => ctrl.abort(), 9000);
         const res = await fetch(`/api/status/${coolifyId}`, { signal: ctrl.signal });
         clearTimeout(timer);
-        if (!res.ok) { setBadge(badgeEl, 'down'); return; }
-        const data = await res.json();
-        setBadge(badgeEl, coolifyToKey(data.status));
+        if (!res.ok) { setBadge(badgeEl, 'down'); }
+        else {
+          const data = await res.json();
+          setBadge(badgeEl, coolifyToKey(data.status));
+        }
       } catch {
         setBadge(badgeEl, 'unknown');
       }
+      updateNavStatus();
     }
 
     // ── Build a single app card ───────────────────────────────
@@ -594,12 +597,6 @@
       }
     }
 
-    // Patch fetchStatus to also update nav after each check
-    const _origFetchStatus = fetchStatus;
-    async function fetchStatus(coolifyId, badgeEl) {
-      await _origFetchStatus(coolifyId, badgeEl);
-      updateNavStatus();
-    }
 
     // ── Load apps.json and render ────────────────────────────
     async function loadApps() {
