@@ -19,10 +19,18 @@
     {
       "name": "Pricing",
       "description": "Análise de tarifas e Scraper automatizado que coleta e estrutura preços de aluguel de carros do site RentCars.com usando Selenium para navegar pelas páginas e exportar os dados em Excel.",
-      "url": "http://pricing-deployhub.duckdns.org/",
+      "url": "https://pricing-deployhub.duckdns.org/",
       "icon": "📈",
       "tags": ["FastAPI", "Python", "Selenium", "Pandas"],
       "status": "live"
-    }
+    },
+    {
+        "name": "Controle Jurídico ASA",
+        "description": "Sistema de gestão de ações trabalhistas com controle de processos, solicitação e upload de documentos, fluxo de aprovação e histórico completo. Acesso por perfil: ADM, Advogado e RH.",
+        "url": "https://projetojuridicoasa.duckdns.org",
+        "icon": "⚖️",
+        "tags": ["Next.js", "TypeScript", "Supabase", "RBAC"],
+        "status": "live"
+ }
   ]
 }
