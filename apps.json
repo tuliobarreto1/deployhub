@@ -44,6 +44,15 @@
       "tags": ["React", "Vite", "Rules Engine", "Totem"],
       "status": "live",
       "coolify_id": "z4o4044os8080s8s0c4ksskc"                                        
+    },
+    {
+      "name": "Supabase",
+      "description": "Plataforma de banco de dados e autenticação self-hosted. Backend para autenticação, armazenamento e APIs em tempo real dos projetos internos.",
+      "url": "https://supabase-deployhub.duckdns.org",
+      "icon": "🗄️",
+      "tags": ["PostgreSQL", "Auth", "Storage", "Realtime"],
+      "status": "live",
+      "coolify_id": "ig804gsw4w80wgckk8wcgokg"
     }
   ]
 }
