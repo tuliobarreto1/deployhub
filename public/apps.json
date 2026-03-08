@@ -1,0 +1,67 @@
+{
+  "apps": [
+    {
+      "name": "PMO Manager",
+      "description": "Gestão de projetos com Gantt interativo, curva S, dashboard de desempenho e controle de orçamento e riscos.",
+      "url": "https://pmomanager-deployhub.duckdns.org",
+      "icon": "📊",
+      "tags": ["Next.js", "TypeScript", "Supabase", "Gestão"],
+      "status": "live",
+      "coolify_id": "c4wg4gcg4go8s8o0w4csoo4g"
+    },
+    {
+      "name": "Status de Reservas",
+      "description": "Acompanhamento em tempo real das reservas por data e loja, análise de frota e histórico de ocupação. Integrado ao sistema ASA via VPN.",
+      "url": "https://status-reservas.duckdns.org",
+      "icon": "🚗",
+      "tags": ["FastAPI", "React", "SQL Server", "VPN"],
+      "status": "live",
+      "coolify_id": "pog0kgcc8ccw40csw884sk4o"
+    },
+    {
+      "name": "Pricing",
+      "description": "Análise de tarifas e Scraper automatizado que coleta e estrutura preços de aluguel de carros do site RentCars.com usando Selenium para navegar pelas páginas e exportar os dados em Excel.",
+      "url": "https://pricing-deployhub.duckdns.org/",
+      "icon": "📈",
+      "tags": ["FastAPI", "Python", "Selenium", "Pandas"],
+      "status": "live",
+      "coolify_id": "iosggcsowoog40kggkowsokk"
+    },
+    {
+      "name": "Controle Jurídico ASA",
+      "description": "Sistema de gestão de ações trabalhistas com controle de processos, solicitação e upload de documentos, fluxo de aprovação e histórico completo. Acesso por perfil: ADM, Advogado e RH.",
+      "url": "https://projetojuridicoasa.duckdns.org",
+      "icon": "⚖️",
+      "tags": ["Next.js", "TypeScript", "Supabase", "RBAC"],
+      "status": "live",
+      "coolify_id": "b04oogwgkgwo8sg4ksskk0ok"
+    },
+    {
+      "name": "ASA Questions",
+      "description": "Sistema de recomendação inteligente de upgrades e adicionais para locação. Interface estilo totem para atendentes com motor de regras configurável via JSON.",
+      "url": "https://asa-questions.duckdns.org",
+      "icon": "❓",
+      "tags": ["React", "Vite", "Rules Engine", "Totem"],
+      "status": "live",
+      "coolify_id": "z4o4044os8080s8s0c4ksskc"
+    },
+    {
+      "name": "Supabase",
+      "description": "Plataforma de banco de dados e autenticação self-hosted. Backend para autenticação, armazenamento e APIs em tempo real dos projetos internos.",
+      "url": "https://supabase-self.duckdns.org/",
+      "icon": "🗄️",
+      "tags": ["PostgreSQL", "Auth", "Storage", "Realtime"],
+      "status": "live",
+      "coolify_id": "r4w84gsc04wg0sowokooss44"
+    },
+    {
+    "name": "REST Óculos",
+    "description": "Landing page de e-commerce premium de óculos de sol e acessórios de luxo. Exibe coleção com produtos, preços e navegação por Coleção, Sobre e Contato.",
+    "url": "https://rest-oculos.duckdns.org",
+    "icon": "🕶️",
+    "tags": ["React", "Vite", "E-commerce", "Landing Page"],
+    "status": "live",
+    "coolify_id": "j8c44cgow804ccok0o0c44co"
+  }
+  ]
+}

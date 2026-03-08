@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f0f"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="100%" style="stop-color:#7b2fff"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#7b2fff;stop-opacity:0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="7" fill="url(#bg)"/>
+  <rect width="32" height="32" rx="7" fill="url(#glow)"/>
+  <rect width="32" height="32" rx="7" fill="none" stroke="url(#accent)" stroke-width="0.8" opacity="0.5"/>
+  <path d="M16 5 C16 5 20 9 20 15 L16 18 L12 15 C12 9 16 5 16 5Z" fill="url(#accent)" opacity="0.95"/>
+  <circle cx="16" cy="13" r="2" fill="#0f0f0f" opacity="0.8"/>
+  <circle cx="16" cy="13" r="1.2" fill="url(#accent)" opacity="0.6"/>
+  <path d="M12 15 L9 19 L13 17Z" fill="url(#accent)" opacity="0.7"/>
+  <path d="M20 15 L23 19 L19 17Z" fill="url(#accent)" opacity="0.7"/>
+  <path d="M14 18 Q16 23 18 18" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.8" stroke-linecap="round"/>
+  <path d="M15 18 Q16 21 17 18" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.6" stroke-linecap="round"/>
+  <circle cx="7" cy="25" r="1.2" fill="#00d4ff" opacity="0.7"/>
+  <circle cx="16" cy="27" r="1.2" fill="#7b2fff" opacity="0.7"/>
+  <circle cx="25" cy="25" r="1.2" fill="#00d4ff" opacity="0.7"/>
+  <line x1="7" y1="25" x2="16" y2="27" stroke="url(#accent)" stroke-width="0.6" opacity="0.5"/>
+  <line x1="16" y1="27" x2="25" y2="25" stroke="url(#accent)" stroke-width="0.6" opacity="0.5"/>
+</svg>
