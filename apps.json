@@ -48,7 +48,7 @@
     {
       "name": "Supabase",
       "description": "Plataforma de banco de dados e autenticação self-hosted. Backend para autenticação, armazenamento e APIs em tempo real dos projetos internos.",
-      "url": "https://supabase-deployhub.duckdns.org",
+      "url": "https://supabase-self.duckdns.org/",
       "icon": "🗄️",
       "tags": ["PostgreSQL", "Auth", "Storage", "Realtime"],
       "status": "live",
