@@ -35,6 +35,15 @@
       "tags": ["Next.js", "TypeScript", "Supabase", "RBAC"],
       "status": "live",
       "coolify_id": "b04oogwgkgwo8sg4ksskk0ok"
+    },
+    {
+      "name": "ASA Questions",
+      "description": "Sistema de recomendação inteligente de upgrades e adicionais para locação. Interface estilo totem para atendentes com motor de regras configurável via JSON.",
+      "url": "https://asa-questions.duckdns.org",
+      "icon": "❓",
+      "tags": ["React", "Vite", "Rules Engine", "Totem"],
+      "status": "live",
+      "coolify_id": "z4o4044os8080s8s0c4ksskc"                                        
     }
   ]
 }
