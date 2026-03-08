@@ -53,6 +53,15 @@
       "tags": ["PostgreSQL", "Auth", "Storage", "Realtime"],
       "status": "live",
       "coolify_id": "r4w84gsc04wg0sowokooss44"
+    },
+    {
+      "name": "REST Óculos",
+      "description": "Landing page de e-commerce premium de óculos de sol e acessórios de luxo. Exibe coleção com produtos, preços e navegação por Coleção, Sobre e Contato.",
+      "url": "https://rest-oculos.duckdns.org",
+      "icon": "🕶️",
+      "tags": ["React", "Vite", "E-commerce", "Landing Page"],
+      "status": "live",
+      "coolify_id": "j8c44cgow804ccok0o0c44co"
     }
   ]
 }
