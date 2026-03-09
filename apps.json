@@ -62,6 +62,24 @@
       "tags": ["React", "Vite", "E-commerce", "Landing Page"],
       "status": "live",
       "coolify_id": "j8c44cgow804ccok0o0c44co"
+    },
+    {
+      "name": "CheckForms",
+      "description": "Sistema de criação e gestão de checklists com builder de formulários customizável, controle de empresas, unidades e usuários por perfil, preenchimento mobile-friendly e geração de relatórios.",
+      "url": "https://projeto-jean.duckdns.org",
+      "icon": "✅",
+      "tags": ["React", "Vite", "TypeScript", "Supabase", "RBAC"],
+      "status": "live",
+      "coolify_id": "t84gwksgo0k048g88c84c8og"
+    },
+    {
+      "name": "Luciano Gomes Advocacia",
+      "description": "Site institucional de escritório de advocacia especializado em planos de saúde. Inclui blog com Contentful CMS, FAQ, formulário de contato, áreas de atuação (negativa de cirurgias, medicamentos de alto custo, erro médico, reajuste abusivo) e integração com WhatsApp.",
+      "url": "https://lucianogomes.duckdns.org",
+      "icon": "⚖️",
+      "tags": ["Astro", "Tailwind CSS", "Contentful", "Landing Page"],
+      "status": "live",
+      "coolify_id": "d8www000ockow0k40cosccco"
     }
   ]
 }
