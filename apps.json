@@ -66,7 +66,7 @@
     {
       "name": "CheckForms",
       "description": "Sistema de criação e gestão de checklists com builder de formulários customizável, controle de empresas, unidades e usuários por perfil, preenchimento mobile-friendly e geração de relatórios.",
-      "url": "https://projeto-jean.duckdns.org",
+      "url": "https://jbscorporativas.com.br",
       "icon": "✅",
       "tags": ["React", "Vite", "TypeScript", "Supabase", "RBAC"],
       "status": "live",
